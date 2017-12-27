@@ -4,7 +4,7 @@
 This World of Warcraft 1.12.1 "Vanilla" addon will attempt to identify people
 healing using automated healing addons, such as QuickHeal.
 
-While QuickHeal (QH) as such is not bad (or forbidden), it are sometimes used
+While QuickHeal (QH) as such is not bad (or forbidden), it is sometimes used
 to spam healing while hiding the brain! This addon intercept the internal QH 
 communication, and keeps a list of characters found to be using the QH addon.
 

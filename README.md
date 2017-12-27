@@ -22,8 +22,10 @@ An optional parameter can be passed to the command:
 * PARTY
 * RAID
 * GUILD
+
 This parameter will redirect the list of QH users to the selected channel.
 E.g. ```/pitty stats raid``` will list QH statistics in the raid channel.
+If no parameter is give, the output will be shown locally.
 
 
 ```/pitty reset```

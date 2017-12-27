@@ -41,6 +41,6 @@ PiTTY is named after Pitzwald: a holy priest and the priest class leader in the 
 
 Pitzwald himself was against the use of QuickHeal (for priests), and this addon was made to help him identify "QH slackers" in the guild.
 
-Pitzwald stopped playing Autumn 2017, after a ban wave wiped the top of GGC and caused &lt;Goldshire Golfclub&gt; to stop raiding activity, and although Pitzwald himself was not banned, but quitted the game for good after guild stopped raiding.
+Pitzwald stopped playing Autumn 2017, after a ban wave wiped the top of GGC and caused &lt;Goldshire Golfclub&gt; to stop all raiding activity, and although Pitzwald himself was not banned,he quitted the game for good after guild stopped raiding.
 
 RIP Pitzwald.

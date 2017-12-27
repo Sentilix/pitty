@@ -1,0 +1,9 @@
+
+* Feature: add "/pitty version"
+* Feature: add "/pitty help" (the text)
+* Feature: add "/pitty reset"
+* Bug: Each QH entry is counted twice: one for Update and one for Stop
+
+
+
+

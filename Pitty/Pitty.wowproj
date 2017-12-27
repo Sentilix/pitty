@@ -1,0 +1,36 @@
+﻿<Project DefaultTargets="Deploy" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Default</Configuration>
+    <Name>Pitty</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{222bdc6f-3744-4bb2-949b-1ef3ff4421e3}</ProjectGuid>
+    <AssemblyName>WowAddon1</AssemblyName>
+    <RootNamespace>WowAddon1</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Default' ">
+    <OutputPath>.</OutputPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WowAddonStudio\2.0\WowAddonStudio.targets" />
+  <ItemGroup>
+    <Content Include="Pitty.toc">
+      <SubType>TableOfContents</SubType>
+    </Content>
+    <Content Include="PittyFrame.lua">
+      <SubType>Code</SubType>
+      <DependentUpon>PittyFrame.xml</DependentUpon>
+    </Content>
+    <Content Include="PittyFrame.xml">
+      <SubType>Frame</SubType>
+    </Content>
+  </ItemGroup>
+  <!--
+	To modify your build process, add your task inside one of the targets below and uncomment it. 
+		
+	<Target Name="BeforeClean"></Target>
+	<Target Name="AfterClean"></Target>
+	<Target Name="BeforeRebuild"></Target>
+	<Target Name="AfterRebuild"></Target>
+	<Target Name="BeforeDeploy"></Target>
+	<Target Name="AfterDeploy"></Target>
+	-->
+</Project>

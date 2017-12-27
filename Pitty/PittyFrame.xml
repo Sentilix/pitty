@@ -1,0 +1,21 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Script file="PittyFrame.lua"/>
+
+	<Frame name="PittyFrame">
+		<Scripts>
+			<OnLoad>
+				if (Pitty_OnLoad) then
+					Pitty_OnLoad();
+				end
+			</OnLoad>
+			<OnEvent>
+				if (Pitty_OnEvent) then
+					Pitty_OnEvent(event, arg1, arg2, arg3, arg4, arg5);
+				end
+			</OnEvent>
+			<OnUpdate>
+			</OnUpdate>
+		</Scripts>
+	</Frame>
+	
+</Ui>

@@ -1,12 +1,6 @@
 ﻿--[[
 	Author:			Mimma
 	Create Date:	5/23/2016 4:59:42 PM	
-	
-Checked version:
-QH 1.16.2
-Unchecked version:
-QH 1.13.4
-	
 ]]
 
 local PARTY_CHANNEL = "PARTY"
@@ -56,7 +50,9 @@ local function partyEcho(msg)
 end
 
 local function raidEcho(msg)
-	SendChatMessage(msg, RAID_CHANNEL);
+	if Pitty_IsInRaid() then
+		SendChatMessage(msg, RAID_CHANNEL);
+	end
 end
 
 local function guildEcho(msg)
@@ -98,19 +94,30 @@ end
 
 
 --[[
-	Main entry for Thaliz.
+	Main entry for Pitty.
 	This will send the request to one of the sub slash commands.
-	Syntax: /thaliz [option, defaulting to "res"]
+	Syntax: /pitty [option, defaulting to "res"]
 	Added in: 0.0.1
 ]]
 SLASH_PITTY_PITTY1 = "/pitty"
 SlashCmdList["PITTY_PITTY"] = function(msg)
-	local _, _, option = string.find(msg, "(%S*)");
+	local option, args
+	local spacepos = string.find(msg, "%s");
+	if spacepos then
+		_, _, option, args = string.find(msg, "(%S+)%s+(.+)");
+	else
+		_, _, option = string.find(msg, "(%S*)");
+		args = "";
+	end	
 	
 	if (not option) or (option == "") then
 		option = "HELP";
 	end
+	if (not args) or (args == "") then
+		args = "";
+	end
 	option = string.upper(option);
+	args = string.upper(args);
 
 	if (option == "HELP" or option == "?") then
 		Pitty_ShowHelp();
@@ -127,9 +134,9 @@ end
 
 
 --[[
-	Main entry for Thaliz.
+	Main entry for Pitty.
 	This will send the request to one of the sub slash commands.
-	Syntax: /thaliz [option, defaulting to "res"]
+	Syntax: /pitty [option, defaulting to "LOCAL"]
 	Added in: 0.0.1
 ]]
 SLASH_PITTY_STATS1 = "/pittystats"
@@ -293,7 +300,7 @@ end
 
 local function Pitty_OnChatMsgAddon(event, prefix, msg, channel, sender)
     if prefix == "Panza" or prefix == "QuickHeal" or prefix == "Heart" or prefix == "Genesis" then
-		-- echo(string.format("QH: %s > %s", sender, msg));
+		--echo(string.format("QH: %s > %s", sender, msg));
 	    local _, _, status, target, healed, hot, timeleft = string.find(msg, "^(.+), (.+), .+, (%d+%.?%d*), (%d+%.?%d*), %d+%.?%d*, (%d+%.?%d*)");
 		if status == "Update" then		
 			Pitty_RegisterQHeal(sender, healed);

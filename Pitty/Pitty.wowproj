@@ -3,9 +3,11 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Default</Configuration>
     <Name>Pitty</Name>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{222bdc6f-3744-4bb2-949b-1ef3ff4421e3}</ProjectGuid>
-    <AssemblyName>WowAddon1</AssemblyName>
-    <RootNamespace>WowAddon1</RootNamespace>
+    <ProjectGuid>{62bfbad3-9083-41a8-a662-4917c18de7af}</ProjectGuid>
+    <AssemblyName>Pitty</AssemblyName>
+    <RootNamespace>Pitty</RootNamespace>
+    <WowPath>D:\Games\World of Warcraft 1.12.1\</WowPath>
+    <AddonTitle>Pitty</AddonTitle>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Default' ">
     <OutputPath>.</OutputPath>
@@ -17,7 +19,6 @@
     </Content>
     <Content Include="PittyFrame.lua">
       <SubType>Code</SubType>
-      <DependentUpon>PittyFrame.xml</DependentUpon>
     </Content>
     <Content Include="PittyFrame.xml">
       <SubType>Frame</SubType>

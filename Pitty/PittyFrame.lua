@@ -215,7 +215,7 @@ function Pitty_ShowStats(channel)
 		count = QHPlayers[n][2];
 		healed = QHPlayers[n][3];
 			
-		customEcho(channel, string.format("%d: %s (%d healed / %d average)", n, playername, healed, round(healed / count) ));
+		customEcho(channel, string.format("%d: %s (%d healed / %d average)", n, playername, healed, math.floor(healed / count) ));
 	end
 	
 	if playersFound == 0 then
@@ -347,5 +347,5 @@ end
 function Pitty_OnLoad()
 	gEcho("PiTTY version " .. GetAddOnMetadata("PiTTY", "Version") .. " by ".. GetAddOnMetadata("PiTTY", "Author"))
 
-    this:RegisterEvent("CHAT_MSG_ADDON")    
+  this:RegisterEvent("CHAT_MSG_ADDON")    
 end

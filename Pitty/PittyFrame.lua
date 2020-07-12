@@ -1,7 +1,51 @@
-﻿--[[
+--[[
 	Author:			Mimma
 	Create Date:	5/23/2016 4:59:42 PM	
 ]]
+
+local L = "Pitty"
+-- Translated by shikulja
+if GetLocale()=="ruRU" then
+ UNKNOWN_COM=  "Неизвестная команда: %s"
+ USING_VER=    "%s использует версию PiTTY %s"
+ QH_LIST=      "Список QuickHeal очищен."
+ DET_NEWP=     "Обнаружен новый игрок QH : %s (лечение на %d ед.)"
+ QH_STATS=     "Статистика QuickHeal:"
+ QH_HEALED=    "%d: %s (%d вылечено / %d в среднем)"
+ QH_NOTFOUND=  "Не найдены игроки использующие QuickHeal."
+ PITTY_OPT=    "PiTTY версия %s настройки:"
+ HELP_1=       "Синтаксис:"
+ HELP_2=       "    /pitty stats     Отображает статистику. Канал - опциональный параметр:"
+ HELP_3=       "        party        Отображает список в канале Группы"
+ HELP_4=       "        raid         Отображает список в канале Рейда"
+ HELP_5=       "        rw           Отображает список как Рейдовые предупреждения"
+ HELP_6=       "        guild        Отображает список в канале Гильдии"
+ HELP_7=       "Остальные команды:"
+ HELP_8=       "    /pittyreset      Сброс (пусто) статистики QH"
+ HELP_9=       "    /pittyversion    Узнать версию"
+ HELP_10=      "    /pittyhelp       Эта страница помощи :-)"
+ PITTY_V=      "PiTTY версия "
+else
+ UNKNOWN_COM=  "Unknown command: %s"
+ USING_VER=    "%s is using PiTTY version %s"
+ QH_LIST=      "QuickHeal list has been cleared."
+ DET_NEWP=     "Detected new QH player: %s (healing for %d)"
+ QH_STATS=     "QuickHeal Stats:"
+ QH_HEALED=    "%d: %s (%d healed / %d average)"
+ QH_NOTFOUND=  "No players were found using QuickHeal."
+ PITTY_OPT=    "PiTTY version %s options:"
+ HELP_1=       "Syntax:"
+ HELP_2=       "    /pitty stats     Display stats. Channel is optional parameter:"
+ HELP_3=       "        party        Will display list in Party channel"
+ HELP_4=       "        raid         Will display list in Raid channel"
+ HELP_5=       "        rw           Will display list as Raid warnings"
+ HELP_6=       "        guild        Will display list in Guild channel"
+ HELP_7=       "Other commands:"
+ HELP_8=       "    /pittyreset      Reset (empty) QH stats"
+ HELP_9=       "    /pittyversion    Check version"
+ HELP_10=      "    /pittyhelp       This help page :-)"
+ PITTY_V=      "PiTTY version "
+end
 
 local PARTY_CHANNEL = "PARTY"
 local RAID_CHANNEL  = "RAID"
@@ -128,7 +172,7 @@ SlashCmdList["PITTY_PITTY"] = function(msg)
 	elseif option == "VERSION" then
 		Pitty_ShowVersion();
 	else
-		gEcho(string.format("Unknown command: %s", option));
+		gEcho(string.format(UNKNOWN_COM, option));
 	end
 end
 
@@ -176,14 +220,14 @@ function Pitty_ShowVersion()
 	if Pitty_IsInRaid() or Pitty_IsInParty() then
 		addonEcho("TX_VERSION##");
 	else
-		gEcho(string.format("%s is using PiTTY version %s", UnitName("player"), GetAddOnMetadata("Pitty", "Version")));
+		gEcho(string.format(USING_VER, UnitName("player"), GetAddOnMetadata("Pitty", "Version")));
 	end
 end
 
 
 function Pitty_ResetList()
 	QHPlayers = { };
-	gEcho("QuickHeal list has been cleared.");
+	gEcho(QH_LIST);
 end
 
 
@@ -200,12 +244,12 @@ local function Pitty_RegisterQHeal(playername, healed)
 	
 	-- Player not found; add him/her:	
 	QHPlayers[ table.getn(QHPlayers) + 1] = { playername, 1, healed };
-	gEcho(string.format("Detected new QH player: %s (healing for %d)", playername, healed));
+	gEcho(string.format(DET_NEWP, playername, healed));
 end
 
 
 function Pitty_ShowStats(channel)
-	customEcho(channel, "QuickHeal Stats:");
+	customEcho(channel, QH_STATS);
 
 	local sortedTable = Pitty_SortTableDescending(QHPlayers, 3);
 	local playername, healed, count;
@@ -215,27 +259,27 @@ function Pitty_ShowStats(channel)
 		count = QHPlayers[n][2];
 		healed = QHPlayers[n][3];
 			
-		customEcho(channel, string.format("%d: %s (%d healed / %d average)", n, playername, healed, math.floor(healed / count) ));
+		customEcho(channel, string.format(QH_HEALED, n, playername, healed, math.floor(healed / count) ));
 	end
 	
 	if playersFound == 0 then
-		customEcho(channel, "No players were found using QuickHeal.");
+		customEcho(channel, QH_NOTFOUND);
 	end
 end
 
 
 function Pitty_ShowHelp()
-	gEcho(string.format("PiTTY version %s options:", GetAddOnMetadata("Pitty", "Version")));
-	gEcho("Syntax:");
-	gEcho("    /pitty stats     Display stats. Channel is optional parameter:");
-	gEcho("        party        Will display list in Party channel");
-	gEcho("        raid         Will display list in Raid channel");
-	gEcho("        rw           Will display list as Raid warnings");
-	gEcho("        guild        Will display list in Guild channel");
-	gEcho("Other commands:");
-	gEcho("    /pittyreset      Reset (empty) QH stats");
-	gEcho("    /pittyversion    Check version");
-	gEcho("    /pittyhelp       This help page :-)");
+	gEcho(string.format(PITTY_OPT, GetAddOnMetadata("Pitty", "Version")));
+	gEcho(HELP_1);
+	gEcho(HELP_2);
+	gEcho(HELP_3);
+	gEcho(HELP_4);
+	gEcho(HELP_5);
+	gEcho(HELP_6);
+	gEcho(HELP_7);
+	gEcho(HELP_8);
+	gEcho(HELP_9);
+	gEcho(HELP_10);
 end
 
 
@@ -289,7 +333,7 @@ end
 	A version response (RX) was received. The version information is displayed locally.
 ]]
 local function HandleRXVersion(message, sender)
-	gEcho(string.format("%s is using PiTTY version %s", sender, message))
+	gEcho(string.format(USING_VER, sender, message))
 end
 
 
@@ -345,7 +389,7 @@ end
 
 
 function Pitty_OnLoad()
-	gEcho("PiTTY version " .. GetAddOnMetadata("PiTTY", "Version") .. " by ".. GetAddOnMetadata("PiTTY", "Author"))
+	gEcho(PITTY_V .. GetAddOnMetadata("PiTTY", "Version") .. " by ".. GetAddOnMetadata("PiTTY", "Author"))
 
   this:RegisterEvent("CHAT_MSG_ADDON")    
 end
